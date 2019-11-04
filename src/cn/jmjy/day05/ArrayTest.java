@@ -1,28 +1,79 @@
 package cn.jmjy.day05;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ArrayTest {
     public static void main(String[] args) {
+        int[] arr = { 3, 8, 12, 23, 88, 128, 666 };
+        System.out.println(binarySearch(arr, 12));
+        System.out.println(binarySearch(arr, 128));
+        System.out.println(binarySearch(arr, 100));
+    }
 
-        //test1();
-        //test2();
-        //test3();
-        //test4();
-        //test5();
-        //test6();
-        //test7();
-        //test8();
-        //test9();
-        //test10();
 
+    public static int binarySearch(int[] arr, int key) {
+        int from = 0;
+        int to = arr.length-1;
+        int mid = (to-from) / 2;
+        while (from <= to) {
+            if (arr[mid] == key) {
+                return mid;
+            } else if (arr[mid] > key) {
+                to = mid-1;
+                mid = (from + to) / 2;
+            } else {
+                from = mid + 1;
+                mid = (from + to) / 2;
+            }
+        }
+        return-1;
+    }
+
+
+
+
+
+
+
+    public static void compareSort() {
+        Random r = new Random();
+        int arrLength = 100000;
+        int arr[] = new int[arrLength];
+        int arr1[] = new int[arrLength];
+        int arr2[] = new int[arrLength];
+        for (int i = 0; i < arrLength; i++) {
+            arr[i] = r.nextInt(arrLength);
+            arr1[i] = arr[i];
+            arr2[i] = arr[i];
+        }
+        //冒泡排序
+        long start = System.currentTimeMillis();
+        bubbleSort(arr);
+        long end = System.currentTimeMillis();
+        System.out.println("冒泡排序所花的时间："+(end-start));
+
+        //选择排序
+        start = System.currentTimeMillis();
+        selectionSort(arr1);
+        end=System.currentTimeMillis();
+        System.out.println("选择排序所花的时间："+(end-start));
+        //系统排序
+        start = System.currentTimeMillis();
+        Arrays.sort(arr2);
+        end=System.currentTimeMillis();
+        System.out.println("系统排序所花的时间："+(end-start));
     }
 
     private static void test10() {
         int [] data={666,8,88,23,12,98};
         System.out.println(Arrays.toString(data));
         System.out.println("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+        selectionSort(data);
+    }
+
+    private static void selectionSort(int[] data) {
         for (int x = 0; x < data.length-1; x++) {
             int min=x;
             for (int i = min+1; i < data.length; i++) {
@@ -33,11 +84,8 @@ public class ArrayTest {
             int temp=data[x];
             data[x]=data[min];
             data[min]=temp;
-            System.out.println(Arrays.toString(data));
-            System.out.println("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
         }
     }
-
 
 
     private static void test9() {
